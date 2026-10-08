@@ -1,0 +1,24 @@
+{
+  "name": "goose-game-kata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "goose-game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trangdothuy-wallapop/goose-game-kata.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/trangdothuy-wallapop/goose-game-kata/issues"
+  },
+  "homepage": "https://github.com/trangdothuy-wallapop/goose-game-kata#readme",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
