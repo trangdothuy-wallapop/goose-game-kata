@@ -1,13 +1,19 @@
-function run() {
-    for (let i = 0; i <=63; i++) {
-        if (i === 6) {
-            console.log("The Bridge: Go to space 12");
-        } else if (i % 6 === 0) {
-            console.log("Move two spaces forward");
-        } else {
-            console.log(`Stay in space ${i}`);
-        }
+const TOTAL_BOARD_SPACES = 63;
+
+function getNumberRule(space) {
+    if (space === 6) {
+        return "The Bridge: Go to space 12";
+    } else if (space % 6 === 0) {
+        return "Move two spaces forward";
+    } else {
+        return `Stay in space ${space}`;
     }
 }
 
-run()
+function printResult() {
+    for (let space = 1; space <= TOTAL_BOARD_SPACES; space++) {
+        console.log(getNumberRule(space));
+    }
+}
+
+printResult()
