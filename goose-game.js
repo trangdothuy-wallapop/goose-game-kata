@@ -12,26 +12,15 @@ const RULES = {
 };
 
 function getNumberRule(space) {
-    if (RULES[space]) {
-        return RULES[space];
-    } else if (space > TOTAL_BOARD_SPACES) {
-        return penalized(space);
-    } else if (space % 6 === 0) {
-        return "Move two spaces forward";
-    } else {
-        return `Stay in space ${space}`;
-    }
-}
-
-function penalized(space) {
-    if (space > TOTAL_BOARD_SPACES) {
-        return "Move to space 53 and stay in prison for two turns";
-    }
+    if (RULES[space]) return RULES[space];
+    if (space > TOTAL_BOARD_SPACES) return "Move to space 53 and stay in prison for two turns";
+    if (space >= 50 && space <= 55) return "The Prison: Wait until someone comes to release you - they then take your place";
+    if (space % 6 === 0) return "Move two spaces forward";
+    return `Stay in space ${space}`;
 }
 
 function printResult() {
     for (let space = 1; space <= TOTAL_BOARD_SPACES; space++) {
-        console.log(penalized(space));
         console.log(getNumberRule(space));
     }
 }
