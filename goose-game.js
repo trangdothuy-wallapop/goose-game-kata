@@ -5,8 +5,6 @@ const RULES = {
     19: "The Hotel: Stay for (miss) one turn",
     31: "The Well: Wait until someone comes to pull you out - they then take your place",
     42: "The Maze: Go back to space 39",
-    50: "The Prison: Wait until someone comes to release you - they then take your place",
-    55: "The Prison: Wait until someone comes to release you - they then take your place",
     58: "Death: Return your piece to the beginning - start the game again",
     63: "Finish: you ended the game",
 };
