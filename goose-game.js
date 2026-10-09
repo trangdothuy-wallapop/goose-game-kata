@@ -25,6 +25,6 @@ function printResult() {
     }
 }
 
-printResult()
+if (require.main === module) printResult();
 
 module.exports = { getNumberRule };
