@@ -1,4 +1,7 @@
 const TOTAL_BOARD_SPACES = 63;
+const BRIDGE_INTERVAL = 6;
+const PRISON_START = 50;
+const PRISON_END = 55;
 
 const RULES = {
     6: "The Bridge: Go to space 12",
@@ -12,8 +15,8 @@ const RULES = {
 function getNumberRule(space) {
     if (RULES[space]) return RULES[space];
     if (space > TOTAL_BOARD_SPACES) return "Move to space 53 and stay in prison for two turns";
-    if (space >= 50 && space <= 55) return "The Prison: Wait until someone comes to release you - they then take your place";
-    if (space % 6 === 0) return "Move two spaces forward";
+    if (space >= PRISON_START && space <= PRISON_END) return "The Prison: Wait until someone comes to release you - they then take your place";
+    if (space % BRIDGE_INTERVAL === 0) return "Move two spaces forward";
     return `Stay in space ${space}`;
 }
 
