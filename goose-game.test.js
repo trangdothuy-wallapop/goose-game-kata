@@ -56,3 +56,7 @@ test("space 64 is penalized", () => {
     expect(getRuleForSpace(64))
         .toBe("Move to space 53 and stay in prison for two turns");
 });
+
+test.each([1, 7, 20])("space %i is not special", (space) => {
+    expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
+});
