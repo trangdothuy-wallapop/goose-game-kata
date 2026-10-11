@@ -1,5 +1,5 @@
 const TOTAL_BOARD_SPACES = 63;
-const BRIDGE_INTERVAL = 6;
+const MOVE_FORWARD_INTERVAL = 6;
 const PRISON_START = 50;
 const PRISON_END = 55;
 
@@ -29,7 +29,7 @@ function getRuleForSpace(space) {
     if (RULES[space]) return RULES[space];
     if (space > TOTAL_BOARD_SPACES) return PENALTY;
     if (space >= PRISON_START && space <= PRISON_END) return PRISON;
-    if (space % BRIDGE_INTERVAL === 0) return "Move two spaces forward";
+    if (space % MOVE_FORWARD_INTERVAL === 0) return "Move two spaces forward";
     return `Stay in space ${space}`;
 }
 
