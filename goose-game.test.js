@@ -11,6 +11,11 @@ test.each([12, 18, 24, 30, 36, 48, 60])("space %i are multiples of the Bridge in
     expect(getRuleForSpace(space)).toBe("Move two spaces forward");
 });
 
+test("space 54 is multiple of the Bridge interval (6) but should be treated as the prison", () => {
+    expect(getRuleForSpace(54))
+        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
+});
+
 test("space 6 is the Bridge", () => {
     expect(getRuleForSpace(6)).toBe("The Bridge: Go to space 12");
 });
