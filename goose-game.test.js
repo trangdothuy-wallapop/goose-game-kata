@@ -32,8 +32,8 @@ describe("special spaces", () => {
     });
 });
 
-describe("multiples of the Bridge interval (6)", () => {
-    test.each([12, 18, 24, 30, 36, 48, 60])("space %i is a multiple of the Bridge interval (6)", (space) => {
+describe("multiples of the move forward interval (6)", () => {
+    test.each([12, 18, 24, 30, 36, 48, 60])("space %i is a multiple of the move forward interval (6)", (space) => {
         expect(getRuleForSpace(space)).toBe("Move two spaces forward");
     });
 });
@@ -44,7 +44,7 @@ describe("the Prison range", () => {
             .toBe(PRISON);
     });
 
-    test("space 54 is multiple of the Bridge interval (6) but should be priority treated as the prison", () => {
+    test("space 54 is multiple of the move forward interval (6) but should be priority treated as the prison", () => {
         expect(getRuleForSpace(54))
             .toBe(PRISON);
     });
