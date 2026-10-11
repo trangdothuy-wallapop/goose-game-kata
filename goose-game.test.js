@@ -11,11 +11,6 @@ test.each([12, 18, 24, 30, 36, 48, 60])("space %i are multiples of the Bridge in
     expect(getRuleForSpace(space)).toBe("Move two spaces forward");
 });
 
-test("space 54 is multiple of the Bridge interval (6) but should be treated as the prison", () => {
-    expect(getRuleForSpace(54))
-        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
-});
-
 test("space 6 is the Bridge", () => {
     expect(getRuleForSpace(6)).toBe("The Bridge: Go to space 12");
 });
@@ -63,5 +58,15 @@ test("space 64 is penalized", () => {
 });
 
 test.each([1, 7, 20])("space %i is not special", (space) => {
+    expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
+});
+
+// Edge cases
+test("space 54 is multiple of the Bridge interval (6) but should be treated as the prison", () => {
+    expect(getRuleForSpace(54))
+        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
+});
+
+test.each([49, 56])("space %i is outside the prison range and should be treated normally", (space) => {
     expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
 });
