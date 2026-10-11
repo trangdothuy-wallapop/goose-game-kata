@@ -1,5 +1,12 @@
 const { getRuleForSpace } = require("./goose-game");
 
+test("Only accepts valid spaces", () => {
+    expect(() => getRuleForSpace(0)).toThrow(RangeError);
+    expect(() => getRuleForSpace(-1)).toThrow(RangeError);
+    expect(() => getRuleForSpace(1.5)).toThrow(RangeError);
+    expect(getRuleForSpace(1)).toBe("Stay in space 1");
+});
+
 test("space 6 is the Bridge", () => {
     expect(getRuleForSpace(6)).toBe("The Bridge: Go to space 12");
 });
