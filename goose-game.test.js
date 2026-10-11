@@ -20,18 +20,8 @@ test("space 42 is the Maze", () => {
     expect(getRuleForSpace(42)).toBe("The Maze: Go back to space 39");
 });
 
-test("space 50 is the Prison", () => {
-    expect(getRuleForSpace(50))
-        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
-});
-
-test("space 53 is the Prison", () => {
-    expect(getRuleForSpace(53))
-        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
-});
-
-test("space 55 is the Prison", () => {
-    expect(getRuleForSpace(55))
+test.each([50, 51, 52, 53, 54, 55])("space %i is the Prison", (space) => {
+    expect(getRuleForSpace(space))
         .toBe("The Prison: Wait until someone comes to release you - they then take your place");
 });
 
