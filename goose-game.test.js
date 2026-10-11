@@ -1,12 +1,5 @@
 const { getRuleForSpace } = require("./goose-game");
 
-test("Only accepts valid spaces", () => {
-    expect(() => getRuleForSpace(0)).toThrow(RangeError);
-    expect(() => getRuleForSpace(-1)).toThrow(RangeError);
-    expect(() => getRuleForSpace(1.5)).toThrow(RangeError);
-    expect(getRuleForSpace(1)).toBe("Stay in space 1");
-});
-
 test.each([12, 18, 24, 30, 36, 48, 60])("space %i are multiples of the Bridge interval (6)", (space) => {
     expect(getRuleForSpace(space)).toBe("Move two spaces forward");
 });
@@ -68,4 +61,11 @@ test.each([49, 56])("space %i is outside the prison range and should be treated 
 
 test.each([64, 65, 90, 100])("space %i is beyond the finish and should be penalized", (space) => {
     expect(getRuleForSpace(space)).toBe("Move to space 53 and stay in prison for two turns");
+});
+
+test("Only accepts valid spaces", () => {
+    expect(() => getRuleForSpace(0)).toThrow(RangeError);
+    expect(() => getRuleForSpace(-1)).toThrow(RangeError);
+    expect(() => getRuleForSpace(1.5)).toThrow(RangeError);
+    expect(getRuleForSpace(1)).toBe("Stay in space 1");
 });
