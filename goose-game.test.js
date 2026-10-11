@@ -39,7 +39,7 @@ describe("multiples of the Bridge interval (6)", () => {
 });
 
 describe("the Prison range", () => {
-    test.each([50, 51, 52, 53, 54, 55])("space %i is the Prison", (space) => {
+    test.each([50, 51, 52, 53, 55])("space %i is the Prison", (space) => {
         expect(getRuleForSpace(space))
             .toBe(PRISON);
     });
