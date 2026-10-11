@@ -33,7 +33,7 @@ describe("special spaces", () => {
 });
 
 describe("multiples of the Bridge interval (6)", () => {
-    test.each([12, 18, 24, 30, 36, 48, 60])("space %i are multiples of the Bridge interval (6)", (space) => {
+    test.each([12, 18, 24, 30, 36, 48, 60])("space %i is a multiple of the Bridge interval (6)", (space) => {
         expect(getRuleForSpace(space)).toBe("Move two spaces forward");
     });
 });
