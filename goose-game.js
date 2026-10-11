@@ -4,7 +4,9 @@ const PRISON_START = 50;
 const PRISON_END = 55;
 
 // Rule messages
-const BRIDGE = { type: 'MOVE', to: 12, message: 'The Bridge: Go to space 12' };
+// For future iteration, we can represent rules as objects with type, target space, and message like below
+// const BRIDGE = { type: 'MOVE', to: 12, message: 'The Bridge: Go to space 12' };
+const BRIDGE = "The Bridge: Go to space 12";
 const HOTEL = "The Hotel: Stay for (miss) one turn";
 const WELL = "The Well: Wait until someone comes to pull you out - they then take your place";
 const MAZE = "The Maze: Go back to space 39";
