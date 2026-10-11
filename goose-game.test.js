@@ -1,61 +1,74 @@
 const { getRuleForSpace } = require("./goose-game");
 
-test.each([12, 18, 24, 30, 36, 48, 60])("space %i are multiples of the Bridge interval (6)", (space) => {
-    expect(getRuleForSpace(space)).toBe("Move two spaces forward");
+describe("only accepts valid spaces", () => {
+    test("Only accepts valid spaces", () => {
+        expect(() => getRuleForSpace(0)).toThrow(RangeError);
+        expect(() => getRuleForSpace(-1)).toThrow(RangeError);
+        expect(() => getRuleForSpace(1.5)).toThrow(RangeError);
+        expect(getRuleForSpace(1)).toBe("Stay in space 1");
+    });
 });
 
-test("space 6 is the Bridge", () => {
-    expect(getRuleForSpace(6)).toBe("The Bridge: Go to space 12");
+describe("special spaces", () => {
+    test("space 6 is the Bridge", () => {
+        expect(getRuleForSpace(6)).toBe("The Bridge: Go to space 12");
+    });
+
+    test("space 19 is the Hotel", () => {
+        expect(getRuleForSpace(19)).toBe("The Hotel: Stay for (miss) one turn");
+    });
+
+    test("space 31 is the Well", () => {
+        expect(getRuleForSpace(31)).toBe("The Well: Wait until someone comes to pull you out - they then take your place");
+    });
+
+    test("space 42 is the Maze", () => {
+        expect(getRuleForSpace(42)).toBe("The Maze: Go back to space 39");
+    });
+
+    test("space 58 is Death", () => {
+        expect(getRuleForSpace(58))
+            .toBe("Death: Return your piece to the beginning - start the game again");
+    });
+
+    test("space 63 is Finish", () => {
+        expect(getRuleForSpace(63))
+            .toBe("Finish: you ended the game");
+    });
 });
 
-test("space 19 is the Hotel", () => {
-    expect(getRuleForSpace(19)).toBe("The Hotel: Stay for (miss) one turn");
+describe("multiples of the Bridge interval (6)", () => {
+    test.each([12, 18, 24, 30, 36, 48, 60])("space %i are multiples of the Bridge interval (6)", (space) => {
+        expect(getRuleForSpace(space)).toBe("Move two spaces forward");
+    });
 });
 
-test("space 31 is the Well", () => {
-    expect(getRuleForSpace(31)).toBe("The Well: Wait until someone comes to pull you out - they then take your place");
+describe("the Prison range", () => {
+    test.each([50, 51, 52, 53, 54, 55])("space %i is the Prison", (space) => {
+        expect(getRuleForSpace(space))
+            .toBe("The Prison: Wait until someone comes to release you - they then take your place");
+    });
+
+    test("space 54 is multiple of the Bridge interval (6) but should be priority treated as the prison", () => {
+        expect(getRuleForSpace(54))
+            .toBe("The Prison: Wait until someone comes to release you - they then take your place");
+    });
+
+    test.each([49, 56])("space %i is outside the prison range and should be treated normally", (space) => {
+        expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
+    });
 });
 
-test("space 42 is the Maze", () => {
-    expect(getRuleForSpace(42)).toBe("The Maze: Go back to space 39");
+describe("non-special spaces", () => {
+    test.each([1, 7, 20])("space %i is not special", (space) => {
+        expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
+    });
 });
 
-test.each([50, 51, 52, 53, 54, 55])("space %i is the Prison", (space) => {
-    expect(getRuleForSpace(space))
-        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
+describe("spaces beyond the finish", () => {
+    test.each([64, 65, 90, 100])("space %i is beyond the finish and should be penalized", (space) => {
+        expect(getRuleForSpace(space)).toBe("Move to space 53 and stay in prison for two turns");
+    });
 });
 
-test("space 58 is Death", () => {
-    expect(getRuleForSpace(58))
-        .toBe("Death: Return your piece to the beginning - start the game again");
-});
 
-test("space 63 is Finish", () => {
-    expect(getRuleForSpace(63))
-        .toBe("Finish: you ended the game");
-});
-
-test.each([1, 7, 20])("space %i is not special", (space) => {
-    expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
-});
-
-// Edge cases
-test("space 54 is multiple of the Bridge interval (6) but should be treated as the prison", () => {
-    expect(getRuleForSpace(54))
-        .toBe("The Prison: Wait until someone comes to release you - they then take your place");
-});
-
-test.each([49, 56])("space %i is outside the prison range and should be treated normally", (space) => {
-    expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
-});
-
-test.each([64, 65, 90, 100])("space %i is beyond the finish and should be penalized", (space) => {
-    expect(getRuleForSpace(space)).toBe("Move to space 53 and stay in prison for two turns");
-});
-
-test("Only accepts valid spaces", () => {
-    expect(() => getRuleForSpace(0)).toThrow(RangeError);
-    expect(() => getRuleForSpace(-1)).toThrow(RangeError);
-    expect(() => getRuleForSpace(1.5)).toThrow(RangeError);
-    expect(getRuleForSpace(1)).toBe("Stay in space 1");
-});
