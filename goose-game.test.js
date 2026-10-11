@@ -52,11 +52,6 @@ test("space 63 is Finish", () => {
         .toBe("Finish: you ended the game");
 });
 
-test("space 64 is penalized", () => {
-    expect(getRuleForSpace(64))
-        .toBe("Move to space 53 and stay in prison for two turns");
-});
-
 test.each([1, 7, 20])("space %i is not special", (space) => {
     expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
 });
@@ -69,4 +64,8 @@ test("space 54 is multiple of the Bridge interval (6) but should be treated as t
 
 test.each([49, 56])("space %i is outside the prison range and should be treated normally", (space) => {
     expect(getRuleForSpace(space)).toBe(`Stay in space ${space}`);
+});
+
+test.each([64, 65, 90, 100])("space %i is beyond the finish and should be penalized", (space) => {
+    expect(getRuleForSpace(space)).toBe("Move to space 53 and stay in prison for two turns");
 });
