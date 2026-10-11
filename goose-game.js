@@ -21,7 +21,7 @@ const RULES = {
     31: WELL,
     42: MAZE,
     58: DEATH,
-    63: FINISH,
+    [TOTAL_BOARD_SPACES]: FINISH,
 };
 
 function getRuleForSpace(space) {
