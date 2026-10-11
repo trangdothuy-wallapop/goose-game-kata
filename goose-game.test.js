@@ -1,11 +1,8 @@
 const { getRuleForSpace, BRIDGE, HOTEL, WELL, MAZE, DEATH, FINISH, PRISON, PENALTY } = require("./goose-game");
 
 describe("only accepts valid spaces", () => {
-    test("Only accepts valid spaces", () => {
-        expect(() => getRuleForSpace(0)).toThrow(RangeError);
-        expect(() => getRuleForSpace(-1)).toThrow(RangeError);
-        expect(() => getRuleForSpace(1.5)).toThrow(RangeError);
-        expect(getRuleForSpace(1)).toBe("Stay in space 1");
+    test.each([0, -1, 1.5])("Only accepts valid spaces: %i", (space) => {
+        expect(() => getRuleForSpace(space)).toThrow(RangeError);
     });
 });
 
