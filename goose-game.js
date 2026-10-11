@@ -12,7 +12,7 @@ const RULES = {
     63: "Finish: you ended the game",
 };
 
-function getNumberRule(space) {
+function getRuleForSpace(space) {
     if (RULES[space]) return RULES[space];
     if (space > TOTAL_BOARD_SPACES) return "Move to space 53 and stay in prison for two turns";
     if (space >= PRISON_START && space <= PRISON_END) return "The Prison: Wait until someone comes to release you - they then take your place";
@@ -20,12 +20,12 @@ function getNumberRule(space) {
     return `Stay in space ${space}`;
 }
 
-function printResult() {
+function printBoardRules() {
     for (let space = 1; space <= TOTAL_BOARD_SPACES; space++) {
-        console.log(getNumberRule(space));
+        console.log(getRuleForSpace(space));
     }
 }
 
-if (require.main === module) printResult();
+if (require.main === module) printBoardRules();
 
-module.exports = { getNumberRule };
+module.exports = { getRuleForSpace };
