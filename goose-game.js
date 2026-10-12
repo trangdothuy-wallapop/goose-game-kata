@@ -24,13 +24,21 @@ const RULES = {
     [TOTAL_BOARD_SPACES]: FINISH,
 };
 
+function stayInSpace(space) {
+    return `Stay in space ${space}`;
+}
+
+function moveTwoSpacesForward(space) {
+    return `Move two spaces forward`;
+}
+
 function getRuleForSpace(space) {
     if (!Number.isInteger(space) || space < 1) throw new RangeError(`Invalid space: ${space}`);
     if (RULES[space]) return RULES[space];
     if (space > TOTAL_BOARD_SPACES) return PENALTY;
     if (space >= PRISON_START && space <= PRISON_END) return PRISON;
-    if (space % MOVE_FORWARD_INTERVAL === 0) return "Move two spaces forward";
-    return `Stay in space ${space}`;
+    if (space % MOVE_FORWARD_INTERVAL === 0) return moveTwoSpacesForward(space);
+    return stayInSpace(space);
 }
 
 function printBoardRules() {
